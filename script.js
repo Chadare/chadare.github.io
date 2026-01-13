@@ -110,3 +110,4 @@ function hack() {
 function show(msg) {
     document.getElementById("message").textContent = msg;
 }
+
