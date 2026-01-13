@@ -2,31 +2,21 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Connexion</title>
+    <title>Zone sécurisée</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Connexion admin</h1>
+<h1>🔐 Connexion</h1>
 
-<input id="password" type="password" placeholder="Mot de passe">
-<button onclick="login()">Connexion</button>
+<form id="loginForm">
+    <input type="text" id="username" placeholder="Identifiant" required>
+    <input type="password" id="password" placeholder="Mot de passe" required>
+    <button type="submit">Se connecter</button>
+</form>
 
-<p id="msg"></p>
+<p id="message"></p>
 
-<script src="script2.js"></script>
-<script>
-async function login() {
-    const pwd = document.getElementById("password").value;
-    const ok = await loginWithoutSalt(pwd); // volontairement faible
-
-    if (ok) {
-        localStorage.setItem("isAdmin", "true");
-        window.location.href = "admin.html";
-    } else {
-        document.getElementById("msg").textContent = "⛔ Accès refusé";
-    }
-}
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
