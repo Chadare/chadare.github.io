@@ -37,3 +37,4 @@ document.getElementById("logout")?.addEventListener("click", () => {
     localStorage.removeItem("isAdmin");
     location.href = "index.html";
 });
+
