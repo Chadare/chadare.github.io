@@ -1,17 +1,39 @@
-function scrollToSection() {
-    document.getElementById("about").scrollIntoView({
-        behavior: "smooth"
-    });
+// Fake database
+const USERS = [
+    { username: "admin", password: "1234" }
+];
+
+// LOGIN LOGIC
+document.getElementById("loginForm")?.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const u = username.value;
+    const p = password.value;
+
+    const found = USERS.find(user => user.username === u && user.password === p);
+
+    if (found) {
+        localStorage.setItem("isAdmin", "true");
+        window.location.href = "admin.html";
+    } else {
+        message.textContent = "Wrong credentials";
+    }
+});
+
+// ADMIN PAGE PROTECTION
+if (location.pathname.includes("admin.html")) {
+    if (localStorage.getItem("isAdmin") === "true") {
+        document.getElementById("content").style.display = "block";
+        document.getElementById("warning").style.display = "none";
+    } else {
+        setTimeout(() => {
+            location.href = "index.html";
+        }, 500);
+    }
 }
 
-function changeColor() {
-    const colors = [
-        "#0f172a",
-        "#1e1b4b",
-        "#022c22",
-        "#3f1d1d",
-        "#020617"
-    ];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    document.body.style.background = randomColor;
-}
+// LOGOUT
+document.getElementById("logout")?.addEventListener("click", () => {
+    localStorage.removeItem("isAdmin");
+    location.href = "index.html";
+});
